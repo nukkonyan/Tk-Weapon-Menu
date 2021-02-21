@@ -11,7 +11,7 @@ public	Plugin	myinfo	=	{
 	name		=	"[CSS/CSGO] Tk's Weapon Menu",
 	author		=	"Tk /id/Teamkiller324",
 	description	=	"Weapon Menu",
-	version		=	"1.0.0",
+	version		=	"1.1.0",
 	url			=	"https://steamcommunity.com/id/Teamkiller324"
 }
 
@@ -589,7 +589,7 @@ Action	Primary(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_CT)
+				if(CS_GetClientTeam(client) != CSTeam_CTerrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -604,7 +604,7 @@ Action	Primary(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_T)
+				if(CS_GetClientTeam(client) != CSTeam_Terrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -732,7 +732,7 @@ Action Secondary(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_CT)
+				if(CS_GetClientTeam(client) != CSTeam_CTerrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -747,7 +747,7 @@ Action Secondary(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_T)
+				if(CS_GetClientTeam(client) != CSTeam_Terrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -833,7 +833,7 @@ Action Grenades(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_CT)
+				if(CS_GetClientTeam(client) != CSTeam_CTerrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -848,7 +848,7 @@ Action Grenades(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_T)
+				if(CS_GetClientTeam(client) != CSTeam_Terrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -916,7 +916,7 @@ Action Melee(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_CT)
+				if(CS_GetClientTeam(client) != CSTeam_CTerrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -931,7 +931,7 @@ Action Melee(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_T)
+				if(CS_GetClientTeam(client) != CSTeam_Terrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -989,7 +989,7 @@ Action Other(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_CT)
+				if(CS_GetClientTeam(client) != CSTeam_CTerrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -1004,7 +1004,7 @@ Action Other(int client)	{
 					Invalid[client] = false;
 			}
 			else	{
-				if(GetClientTeam(client) != CS_TEAM_T)
+				if(CS_GetClientTeam(client) != CSTeam_Terrorists)
 					Invalid[client] = true;
 				else
 					Invalid[client] = false;
@@ -1033,7 +1033,7 @@ Action Other(int client)	{
 int PrimaryHandler(Menu menu, MenuAction action, int client, int selection)	{
 	switch (action)	{
 		case MenuAction_Select:	{
-			CS_ClientRemoveWeaponSlot(client, 1);
+			CS_ClientRemoveWeaponSlot(client, CSSlot_Primary);
 			char weapon[96];
 			menu.GetItem(selection, weapon, sizeof(weapon));
 			CheckWeapon_Primary(client, weapon);
@@ -1047,7 +1047,7 @@ int PrimaryHandler(Menu menu, MenuAction action, int client, int selection)	{
 int SecondaryHandler(Menu menu, MenuAction action, int client, int selection)	{
 	switch (action)	{
 		case MenuAction_Select:	{
-			CS_ClientRemoveWeaponSlot(client, 2);
+			CS_ClientRemoveWeaponSlot(client, CSSlot_Secondary);
 			char	weapon[96],	defaultPistolCT[32],	defaultPistolT[32];
 			switch(GetEngineVersion())	{
 				case	Engine_CSGO:	{
@@ -1077,7 +1077,7 @@ int SecondaryHandler(Menu menu, MenuAction action, int client, int selection)	{
 int	GrenadesHandler(Menu menu, MenuAction action, int client, int selection)	{
 	switch (action)	{
 		case MenuAction_Select:	{
-			CS_ClientRemoveWeaponSlot(client, 4);
+			CS_ClientRemoveWeaponSlot(client, CSSlot_Grenade);
 			char weapon[96];
 			menu.GetItem(selection, weapon, sizeof(weapon));
 			CheckWeapon_Grenades(client, weapon);
@@ -1091,7 +1091,7 @@ int	GrenadesHandler(Menu menu, MenuAction action, int client, int selection)	{
 int MeleeHandler(Menu menu, MenuAction action, int client, int selection)	{
 	switch(action)	{
 		case MenuAction_Select:	{
-			CS_ClientRemoveWeaponSlot(client, 3);
+			CS_ClientRemoveWeaponSlot(client, CSSlot_Knife);
 			char weapon[96];
 			menu.GetItem(selection, weapon, sizeof(weapon));
 			CheckWeapon_Melee(client, weapon);
@@ -1108,7 +1108,7 @@ int MeleeHandler(Menu menu, MenuAction action, int client, int selection)	{
 int OtherHandler(Menu menu, MenuAction action, int client, int selection)	{
 	switch(action)	{
 		case MenuAction_Select:	{
-			CS_ClientRemoveWeaponSlot(client, 3);
+			CS_ClientRemoveWeaponSlot(client, CSSlot_Knife);
 			char weapon[96];
 			menu.GetItem(selection, weapon, sizeof(weapon));
 			CheckWeapon_Other(client, weapon);
@@ -1342,132 +1342,121 @@ Action GiveWeaponTimer(Handle timer, any client)	{
 
 void GiveWeapon(int client)	{
 	switch(weaponid_primary[client])	{
-		case	1:		GiveClientWeaponEx2(client,	"weapon_ak47",			1,		clip1_ak47,		clip2_ak47);
-		case	2:		GiveClientWeaponEx2(client,	"weapon_m4a1",			1,		clip1_m4a4,		clip2_m4a4);
-		case	3:		GiveClientWeaponEx2(client,	"weapon_m4a1_silencer",	1,		clip1_m4a1s,	clip2_m4a1s);
-		case	4:
-		{
-			if(GetEngineVersion() == Engine_CSGO)
-				GiveClientWeaponEx2(client,	"weapon_sg556",					1,		clip1_sg556,	clip2_sg556);
-			else if(GetEngineVersion() == Engine_CSS)
-				GiveClientWeaponEx2(client,	"weapon_sg552",					1,		clip1_sg552,	clip2_sg552);
+		case	1:		CS_GiveClientWeaponEx2(client,	"weapon_ak47",			CSSlot_Primary,		clip1_ak47,		clip2_ak47);
+		case	2:		CS_GiveClientWeaponEx2(client,	"weapon_m4a1",			CSSlot_Primary,		clip1_m4a4,		clip2_m4a4);
+		case	3:		CS_GiveClientWeaponEx2(client,	"weapon_m4a1_silencer",	CSSlot_Primary,		clip1_m4a1s,	clip2_m4a1s);
+		case	4:	{
+			switch(GetEngineVersion())	{
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_sg556",		CSSlot_Primary,		clip1_sg556,	clip2_sg556);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client,	"weapon_sg552",		CSSlot_Primary,		clip1_sg552,	clip2_sg552);
+			}
 		}
-		case	5:		GiveClientWeaponEx2(client,	"weapon_aug",			1,		clip1_aug,		clip2_aug);
-		case	6:		GiveClientWeaponEx2(client,	"weapon_awp",			1,		clip1_awp,		clip2_awp);
-		case	7:
-		{
-			if(GetEngineVersion() == Engine_CSGO)
-				GiveClientWeaponEx2(client,	"weapon_ssg08",					1,		clip1_ssg08,	clip2_ssg08);
-			else if(GetEngineVersion() == Engine_CSS)
-				GiveClientWeaponEx2(client,	"weapon_scout",					1,		clip1_scout,	clip2_scout);
+		case	5:		CS_GiveClientWeaponEx2(client,	"weapon_aug",			CSSlot_Primary,		clip1_aug,		clip2_aug);
+		case	6:		CS_GiveClientWeaponEx2(client,	"weapon_awp",			CSSlot_Primary,		clip1_awp,		clip2_awp);
+		case	7:	{
+			switch(GetEngineVersion())	{
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_ssg08",		CSSlot_Primary,		clip1_ssg08,	clip2_ssg08);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client,	"weapon_scout",		CSSlot_Primary,		clip1_scout,	clip2_scout);
+			}
 		}
-		case	8:		GiveClientWeaponEx2(client,	"weapon_famas",			1,		clip1_famas,	clip2_famas);
-		case	9:
-		{
-			if(GetEngineVersion() == Engine_CSGO)
-				GiveClientWeaponEx2(client,	"weapon_galilar",				1,		clip1_galilar,	clip2_galilar);
-			else if(GetEngineVersion() == Engine_CSS)	
-				GiveClientWeaponEx2(client,	"weapon_galil",					1,		clip1_galil,	clip2_galil);
+		case	8:		CS_GiveClientWeaponEx2(client,	"weapon_famas",			CSSlot_Primary,		clip1_famas,	clip2_famas);
+		case	9:	{
+			switch(GetEngineVersion())	{
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_galilar",	CSSlot_Primary,		clip1_galilar,	clip2_galilar);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client,	"weapon_galil",		CSSlot_Primary,		clip1_galil,	clip2_galil);
+			}
 		}
-		case	10:		GiveClientWeaponEx2(client,	"weapon_mac10",			1,		clip1_mac10,	clip2_mac10);
-		case	11:
-		{
-			if(GetEngineVersion() == Engine_CSGO)
-				GiveClientWeaponEx2(client,	"weapon_mp5sd",					1,		clip1_mp5sd,	clip2_mp5sd);
-			else if(GetEngineVersion() == Engine_CSS)
-				GiveClientWeaponEx2(client,	"weapon_mp5navy",				1,		clip1_mp5navy,	clip2_mp5navy);
+		case	10:		CS_GiveClientWeaponEx2(client,	"weapon_mac10",			CSSlot_Primary,		clip1_mac10,	clip2_mac10);
+		case	11:	{
+			switch(GetEngineVersion())	{
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_mp5sd",		CSSlot_Primary,		clip1_mp5sd,	clip2_mp5sd);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client,	"weapon_mp5navy",	CSSlot_Primary,		clip1_mp5navy,	clip2_mp5navy);
+			}
 		}
-		case	12:		GiveClientWeaponEx2(client,	"weapon_mp7",			1,		clip1_mp7,		clip2_mp7);
-		case	13:		GiveClientWeaponEx2(client,	"weapon_mp9",			1,		clip1_mp9,		clip2_mp9);
-		case	14:		GiveClientWeaponEx2(client,	"weapon_p90",			1,		clip1_p90,		clip2_p90);
-		case	15:		GiveClientWeaponEx2(client,	"weapon_ump45",			1,		clip1_ump45,	clip2_ump45);
-		case	16:		GiveClientWeaponEx2(client,	"weapon_bizon",			1,		clip1_bizon,	clip2_bizon);
-		case	17:		GiveClientWeaponEx2(client,	"weapon_mag7",			1,		clip1_mag7,		clip2_mag7);
-		case	18:		GiveClientWeaponEx2(client,	"weapon_sawedoff",		1,		clip1_sawedoff,	clip2_sawedoff);
-		case	19:		GiveClientWeaponEx2(client,	"weapon_xm1014",		1,		clip1_xm1014,	clip2_xm1014);
-		case	20:
-		{
-			if(GetEngineVersion() == Engine_CSGO)
-				GiveClientWeaponEx2(client,	"weapon_nova",					1,		clip1_nova,		clip2_nova);
-			else if(GetEngineVersion() == Engine_CSS)
-				GiveClientWeaponEx2(client, "weapon_m3",					1,		clip1_m3,		clip2_m3);
+		case	12:		CS_GiveClientWeaponEx2(client,	"weapon_mp7",			CSSlot_Primary,		clip1_mp7,		clip2_mp7);
+		case	13:		CS_GiveClientWeaponEx2(client,	"weapon_mp9",			CSSlot_Primary,		clip1_mp9,		clip2_mp9);
+		case	14:		CS_GiveClientWeaponEx2(client,	"weapon_p90",			CSSlot_Primary,		clip1_p90,		clip2_p90);
+		case	15:		CS_GiveClientWeaponEx2(client,	"weapon_ump45",			CSSlot_Primary,		clip1_ump45,	clip2_ump45);
+		case	16:		CS_GiveClientWeaponEx2(client,	"weapon_bizon",			CSSlot_Primary,		clip1_bizon,	clip2_bizon);
+		case	17:		CS_GiveClientWeaponEx2(client,	"weapon_mag7",			CSSlot_Primary,		clip1_mag7,		clip2_mag7);
+		case	18:		CS_GiveClientWeaponEx2(client,	"weapon_sawedoff",		CSSlot_Primary,		clip1_sawedoff,	clip2_sawedoff);
+		case	19:		CS_GiveClientWeaponEx2(client,	"weapon_xm1014",		CSSlot_Primary,		clip1_xm1014,	clip2_xm1014);
+		case	20:	{
+			switch(GetEngineVersion())	{
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_nova",		CSSlot_Primary,		clip1_nova,		clip2_nova);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client, "weapon_m3",			CSSlot_Primary,		clip1_m3,		clip2_m3);
+			}
 		}
-		case	21:
-		{
-			if(GetEngineVersion() == Engine_CSGO)
-				GiveClientWeaponEx2(client,	"weapon_scar20",				1,		clip1_scar20,	clip2_scar20);
-			else if(GetEngineVersion() == Engine_CSS)
-				GiveClientWeaponEx2(client,	"weapon_sg550",					1,		clip1_sg550,	clip2_sg550);
+		case	21:	{
+			switch(GetEngineVersion())	{
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_scar20",	CSSlot_Primary,		clip1_scar20,	clip2_scar20);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client,	"weapon_sg550",		CSSlot_Primary,		clip1_sg550,	clip2_sg550);
+			}
 		}
-		case	22:		GiveClientWeaponEx2(client,	"weapon_g3sg1",			1,		clip1_g3sg1,	clip2_g3sg1);
-		case	23:		GiveClientWeaponEx2(client,	"weapon_negev",			1,		clip1_negev,	clip2_negev);
-		case	24:		GiveClientWeaponEx2(client,	"weapon_m249",			1,		clip1_m249,		clip2_m249);
+		case	22:		CS_GiveClientWeaponEx2(client,	"weapon_g3sg1",			CSSlot_Primary,		clip1_g3sg1,	clip2_g3sg1);
+		case	23:		CS_GiveClientWeaponEx2(client,	"weapon_negev",			CSSlot_Primary,		clip1_negev,	clip2_negev);
+		case	24:		CS_GiveClientWeaponEx2(client,	"weapon_m249",			CSSlot_Primary,		clip1_m249,		clip2_m249);
 	}
-	switch (weaponid_secondary[client])	{
-		case	1:		GiveClientWeaponEx2(client,	"weapon_glock",			2,		clip1_glock,	clip2_glock);
-		case	2:
-		{
+	switch(weaponid_secondary[client])	{
+		case	1:		CS_GiveClientWeaponEx2(client,	"weapon_glock",			CSSlot_Secondary,	clip1_glock,	clip2_glock);
+		case	2:	{
 			switch(GetEngineVersion())	{
-				case	Engine_CSGO:
-					GiveClientWeaponEx2(client,	"weapon_usp_silencer",			2,		clip1_usps,		clip2_usps);
-				case	Engine_CSS:
-					GiveClientWeaponEx2(client,	"weapon_usp",					2,		clip1_usp,		clip2_usp);
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_usp_silencer",	CSSlot_Secondary,	clip1_usps,		clip2_usps);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client,	"weapon_usp",			CSSlot_Secondary,	clip1_usp,		clip2_usp);
 			}
 		}
-		case	3:		GiveClientWeaponEx2(client,	"weapon_hkp2000",		2,		clip1_hkp2000,	clip2_hkp2000);
+		case	3:		CS_GiveClientWeaponEx2(client,	"weapon_hkp2000",		CSSlot_Secondary,	clip1_hkp2000,	clip2_hkp2000);
 		case	4:
 		{
 			switch(GetEngineVersion())	{
-				case	Engine_CSGO:
-					GiveClientWeaponEx2(client,	"weapon_p250",					2,		clip1_p250,		clip2_p250);
-				case	Engine_CSS:
-					GiveClientWeaponEx2(client,	"weapon_p228",					2,		clip1_p228,		clip2_p228);
+				case	Engine_CSGO:	CS_GiveClientWeaponEx2(client,	"weapon_p250",	CSSlot_Secondary,	clip1_p250,		clip2_p250);
+				case	Engine_CSS:		CS_GiveClientWeaponEx2(client,	"weapon_p228",	CSSlot_Secondary,	clip1_p228,		clip2_p228);
 			}
 		}
-		case	5:		GiveClientWeaponEx2(client,	"weapon_tec9",			2,		clip1_tec9,		clip2_tec9);
-		case	6:		GiveClientWeaponEx2(client,	"weapon_cz75a",			2,		clip1_cz75a,	clip2_cz75a);
-		case	7:		GiveClientWeaponEx2(client,	"weapon_revolver",		2,		clip1_revolver,	clip2_revolver);
-		case	8:		GiveClientWeaponEx2(client,	"weapon_fiveseven",		2,		clip1_fiveseven,clip2_fiveseven);
-		case	9:		GiveClientWeaponEx2(client,	"weapon_deagle",		2,		clip1_deagle,	clip2_deagle);
+		case	5:		CS_GiveClientWeaponEx2(client,	"weapon_tec9",			CSSlot_Secondary,	clip1_tec9,		clip2_tec9);
+		case	6:		CS_GiveClientWeaponEx2(client,	"weapon_cz75a",			CSSlot_Secondary,	clip1_cz75a,	clip2_cz75a);
+		case	7:		CS_GiveClientWeaponEx2(client,	"weapon_revolver",		CSSlot_Secondary,	clip1_revolver,	clip2_revolver);
+		case	8:		CS_GiveClientWeaponEx2(client,	"weapon_fiveseven",		CSSlot_Secondary,	clip1_fiveseven,clip2_fiveseven);
+		case	9:		CS_GiveClientWeaponEx2(client,	"weapon_deagle",		CSSlot_Secondary,	clip1_deagle,	clip2_deagle);
 	}
 	switch (weaponid_other[client])	{
 		case	1:		GivePlayerItem(client,	"weapon_healthshot");
 		case	2:		GivePlayerItem(client,	"weapon_cutters");
 	}
 	switch (weaponid_melee[client])	{
-		case	1:		GiveClientWeapon(client,	"weapon_knife_karambit",		3);
-		case	2:		GiveClientWeapon(client,	"weapon_knife_m9_bayonet",		3);
-		case	3:		GiveClientWeapon(client,	"weapon_bayonet",				3);
-		//case	3:		GiveClientWeapon(client,	"weapon_knife_bayonet",			3);	//Future proof, if bayonet ever gets its entity name changed
-		case	4:		GiveClientWeapon(client,	"weapon_knife_survival_bowie",	3);
-		case	5:		GiveClientWeapon(client,	"weapon_knife_butterfly",		3);
-		case	6:		GiveClientWeapon(client,	"weapon_knife_flip",			3);
-		case	7:		GiveClientWeapon(client,	"weapon_knife_push",			3);
-		case	8:		GiveClientWeapon(client,	"weapon_knife_tactical",		3);
-		case	9:		GiveClientWeapon(client,	"weapon_knife_falchion",		3);
-		case	10:		GiveClientWeapon(client,	"weapon_knife_gut",				3);
-		case	11:		GiveClientWeapon(client,	"weapon_knife_ursus",			3);
-		case	12:		GiveClientWeapon(client,	"weapon_knife_gypsy_jackknife",	3);
-		case	13:		GiveClientWeapon(client,	"weapon_knife_stiletto",		3);
-		case	14:		GiveClientWeapon(client,	"weapon_knife_widowmaker",		3);
-		case	15:		GiveClientWeapon(client,	"weapon_knife_css",				3);
-		case	16:		GiveClientWeapon(client,	"weapon_knife_cord",			3);
-		case	17:		GiveClientWeapon(client,	"weapon_knife_canis",			3);
-		case	18:		GiveClientWeapon(client,	"weapon_knife_outdoor",			3);
-		case	19:		GiveClientWeapon(client,	"weapon_knife_skeleton",		3);
-		case	20:		GiveClientWeapon(client,	"weapon_fists",					3);
-		case	21:		GiveClientWeapon(client,	"weapon_axe",					3);
-		case	22:		GiveClientWeapon(client,	"weapon_hammer",				3);
-		case	23:		GiveClientWeapon(client,	"weapon_spanner",				3);
+		case	1:		CS_GiveClientWeapon(client,	"weapon_knife_karambit",		CSSlot_Knife);
+		case	2:		CS_GiveClientWeapon(client,	"weapon_knife_m9_bayonet",		CSSlot_Knife);
+		case	3:		CS_GiveClientWeapon(client,	"weapon_bayonet",				CSSlot_Knife);
+		//case	3:		CS_GiveClientWeapon(client,	"weapon_knife_bayonet",			CSSlot_Knife);	//Future proof, if bayonet ever gets its entity name changed
+		case	4:		CS_GiveClientWeapon(client,	"weapon_knife_survival_bowie",	CSSlot_Knife);
+		case	5:		CS_GiveClientWeapon(client,	"weapon_knife_butterfly",		CSSlot_Knife);
+		case	6:		CS_GiveClientWeapon(client,	"weapon_knife_flip",			CSSlot_Knife);
+		case	7:		CS_GiveClientWeapon(client,	"weapon_knife_push",			CSSlot_Knife);
+		case	8:		CS_GiveClientWeapon(client,	"weapon_knife_tactical",		CSSlot_Knife);
+		case	9:		CS_GiveClientWeapon(client,	"weapon_knife_falchion",		CSSlot_Knife);
+		case	10:		CS_GiveClientWeapon(client,	"weapon_knife_gut",				CSSlot_Knife);
+		case	11:		CS_GiveClientWeapon(client,	"weapon_knife_ursus",			CSSlot_Knife);
+		case	12:		CS_GiveClientWeapon(client,	"weapon_knife_gypsy_jackknife",	CSSlot_Knife);
+		case	13:		CS_GiveClientWeapon(client,	"weapon_knife_stiletto",		CSSlot_Knife);
+		case	14:		CS_GiveClientWeapon(client,	"weapon_knife_widowmaker",		CSSlot_Knife);
+		case	15:		CS_GiveClientWeapon(client,	"weapon_knife_css",				CSSlot_Knife);
+		case	16:		CS_GiveClientWeapon(client,	"weapon_knife_cord",			CSSlot_Knife);
+		case	17:		CS_GiveClientWeapon(client,	"weapon_knife_canis",			CSSlot_Knife);
+		case	18:		CS_GiveClientWeapon(client,	"weapon_knife_outdoor",			CSSlot_Knife);
+		case	19:		CS_GiveClientWeapon(client,	"weapon_knife_skeleton",		CSSlot_Knife);
+		case	20:		CS_GiveClientWeapon(client,	"weapon_fists",					CSSlot_Knife);
+		case	21:		CS_GiveClientWeapon(client,	"weapon_axe",					CSSlot_Knife);
+		case	22:		CS_GiveClientWeapon(client,	"weapon_hammer",				CSSlot_Knife);
+		case	23:		CS_GiveClientWeapon(client,	"weapon_spanner",				CSSlot_Knife);
 	}
 	switch (weaponid_grenades[client])	{
-		case	1:		GiveClientWeapon(client,	"weapon_hegrenade",		4);
-		case	2:		GiveClientWeapon(client,	"weapon_flashbang",		4);
-		case	3:		GiveClientWeapon(client,	"weapon_decoy",			4);
-		case	4:		GiveClientWeapon(client,	"weapon_tagrenade",		4);
-		case	5:		GiveClientWeapon(client,	"weapon_molotov",		4);
-		case	6:		GiveClientWeapon(client,	"weapon_incgrenade",	4);
-		case	7:		GiveClientWeapon(client,	"weapon_smokegrenade",	4);
+		case	1:		CS_GiveClientWeapon(client,	"weapon_hegrenade",				CSSlot_Grenade);
+		case	2:		CS_GiveClientWeapon(client,	"weapon_flashbang",				CSSlot_Grenade);
+		case	3:		CS_GiveClientWeapon(client,	"weapon_decoy",					CSSlot_Grenade);
+		case	4:		CS_GiveClientWeapon(client,	"weapon_tagrenade",				CSSlot_Grenade);
+		case	5:		CS_GiveClientWeapon(client,	"weapon_molotov",				CSSlot_Grenade);
+		case	6:		CS_GiveClientWeapon(client,	"weapon_incgrenade",			CSSlot_Grenade);
+		case	7:		CS_GiveClientWeapon(client,	"weapon_smokegrenade",			CSSlot_Grenade);
 	}
 }
 
@@ -1487,7 +1476,7 @@ Action WeaponMenu_Grenades(Event event, const char[] name, bool dontBroadcast)	{
 	int	client	=	GetClientOfUserId(event.GetInt("userid"));
 	
 	if(GrenadeAmmo[client])	{
-		switch (weaponid_grenades[client])
+		switch(weaponid_grenades[client])
 		{
 			case	1:	GivePlayerItem(client,	"weapon_hegrenade");
 			case	2:	GivePlayerItem(client,	"weapon_flashbang");
@@ -1509,7 +1498,7 @@ bool	IsValidClient(int client)	{
 		return	false;
 	if(IsClientSourceTV(client))
 		return	false;
-	if(IsClientObserver(client))
+	if(CS_GetClientTeam(client) < CSTeam_Terrorists) //Is the client ACTUALLY in a team? | has lowest playable team index 2, ct has 3.
 		return	false;
 	return	true;
 }
