@@ -1,4 +1,4 @@
-#include	<tk>
+#include	<tklib>
 #include	<multicolors>
 #include	<clientprefs>
 
